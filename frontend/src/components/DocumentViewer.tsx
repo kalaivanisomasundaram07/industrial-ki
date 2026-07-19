@@ -3,6 +3,7 @@ import {
   X, ChevronLeft, ChevronRight, FileText, FileSpreadsheet, File,
   Download, Copy, Check
 } from "lucide-react";
+import { API_URL } from "../config";
 
 export interface CitationInfo {
   filename: string;
@@ -46,7 +47,7 @@ export default function DocumentViewer({ citation, onClose }: DocumentViewerProp
     if (!citation) return;
     try {
       const response = await fetch(
-        `http://localhost:8000/document/${encodeURIComponent(citation.filename)}`
+        `${API_URL}/document/${encodeURIComponent(citation.filename)}`
       );
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
@@ -105,7 +106,7 @@ export default function DocumentViewer({ citation, onClose }: DocumentViewerProp
 
   if (!citation) return null;
 
-  const documentUrl = `http://localhost:8000/document/${encodeURIComponent(citation.filename)}`;
+  const documentUrl = `${API_URL}/document/${encodeURIComponent(citation.filename)}`;
   // The #page fragment instructs the PDF viewer plugin to scroll to the right page
   const pdfUrlWithPage = `${documentUrl}#page=${currentPage}`;
   const isPdf = isPDF(citation.filename);

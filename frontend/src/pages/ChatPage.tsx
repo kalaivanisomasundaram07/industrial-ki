@@ -9,6 +9,7 @@ import CausalChainView from "../components/CausalChainView";
 import AuditTrail from "../components/AuditTrail";
 import PerformanceBar from "../components/PerformanceBar";
 import DocumentViewer, { type CitationInfo } from "../components/DocumentViewer";
+import { API_URL } from "../config";
 
 interface VerifiedResult {
   category: string;
@@ -318,7 +319,7 @@ export default function ChatPage({ initialQuestion, onQuestionConsumed }: ChatPa
 
   const fetchSessions = async () => {
     try {
-      const res = await fetch("http://localhost:8000/chat/sessions");
+      const res = await fetch(`${API_URL}/chat/sessions`);
       if (res.ok) {
         const data = await res.json();
         setSessions(data);
@@ -331,7 +332,7 @@ export default function ChatPage({ initialQuestion, onQuestionConsumed }: ChatPa
   const loadSessionHistory = async (sessId: string) => {
     if (!sessId) return;
     try {
-      const res = await fetch(`http://localhost:8000/chat/history?session_id=${encodeURIComponent(sessId)}`);
+      const res = await fetch(`${API_URL}/chat/history?session_id=${encodeURIComponent(sessId)}`);
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data)) {
@@ -406,7 +407,7 @@ export default function ChatPage({ initialQuestion, onQuestionConsumed }: ChatPa
   const handleClearHistory = async () => {
     if (!confirm("Are you sure you want to clear chat history?")) return;
     try {
-      const res = await fetch("http://localhost:8000/chat/history", {
+      const res = await fetch(`${API_URL}/chat/history`, {
         method: "DELETE"
       });
       if (res.ok) {
@@ -441,7 +442,7 @@ export default function ChatPage({ initialQuestion, onQuestionConsumed }: ChatPa
     ];
 
     try {
-      const res = await fetch("http://localhost:8000/query", {
+      const res = await fetch(`${API_URL}/query`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: userMessage.text, session_id: currentSessionId }),

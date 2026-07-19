@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
 import { Upload, X, CheckCircle, AlertCircle, FileText, Image, File } from "lucide-react";
+import { API_URL } from "../config";
 
 interface UploadedFile {
   name: string;
@@ -72,7 +73,7 @@ export default function FileUploadZone({ onIngestComplete }: FileUploadZoneProps
         );
       }, 600);
 
-      const res = await fetch("http://localhost:8000/upload", {
+      const res = await fetch(`${API_URL}/upload`, {
         method: "POST",
         body: formData,
       });

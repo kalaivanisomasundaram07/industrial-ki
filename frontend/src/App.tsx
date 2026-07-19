@@ -9,6 +9,7 @@ import ReviewQueuePage from "./pages/ReviewQueuePage";
 import MaintenanceDashboard from "./pages/MaintenanceDashboard";
 import WarningsBanner from "./components/WarningsBanner";
 import UploadModal from "./components/UploadModal";
+import { API_URL } from "./config";
 
 type ActiveTab = "chat" | "graph" | "review" | "maintenance";
 
@@ -44,13 +45,13 @@ export default function App() {
 
   const fetchStatsAndQueue = async () => {
     try {
-      const reviewRes = await fetch("http://localhost:8000/review-queue");
+      const reviewRes = await fetch(`${API_URL}/review-queue`);
       if (reviewRes.ok) {
         const queueData = await reviewRes.json();
         setPendingCount(queueData.length);
       }
 
-      const statsRes = await fetch("http://localhost:8000/graph/stats");
+      const statsRes = await fetch(`${API_URL}/graph/stats`);
       if (statsRes.ok) {
         const statsData = await statsRes.json();
         setGraphStats(statsData);
@@ -62,7 +63,7 @@ export default function App() {
 
   const fetchWarnings = async () => {
     try {
-      const res = await fetch("http://localhost:8000/intelligence/warnings");
+      const res = await fetch(`${API_URL}/intelligence/warnings`);
       if (res.ok) {
         const data = await res.json();
         setWarnings(data);

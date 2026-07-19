@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RefreshCw, AlertTriangle, MessageSquare, Activity, Zap } from "lucide-react";
+import { API_URL } from "../config";
 
 interface RiskItem {
   equipment_name: string;
@@ -70,8 +71,8 @@ export default function MaintenanceDashboard({ onAskAboutEquipment }: Maintenanc
     setLoading(true);
     try {
       const [riskRes, perfRes] = await Promise.all([
-        fetch("http://localhost:8000/maintenance/risk"),
-        fetch("http://localhost:8000/stats/performance"),
+        fetch(`${API_URL}/maintenance/risk`),
+        fetch(`${API_URL}/stats/performance`),
       ]);
 
       if (riskRes.ok) {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Download, ShieldCheck, ShieldAlert, AlertTriangle, ChevronRight } from "lucide-react";
+import { API_URL } from "../config";
 
 interface Gap {
   equipment: string;
@@ -45,7 +46,7 @@ export default function ComplianceGapTable({
     setDownloading(equipment);
     try {
       const res = await fetch(
-        `http://localhost:8000/compliance/evidence/${encodeURIComponent(equipment)}`
+        `${API_URL}/compliance/evidence/${encodeURIComponent(equipment)}`
       );
       if (res.ok) {
         const data = await res.json();

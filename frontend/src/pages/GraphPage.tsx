@@ -4,6 +4,7 @@ import { Search, Info, HelpCircle, TrendingUp, RefreshCw } from "lucide-react";
 import ComplianceGapTable from "../components/ComplianceGapTable";
 import PatternCard from "../components/PatternCard";
 import ComplianceReportModal from "../components/ComplianceReportModal";
+import { API_URL } from "../config";
 
 interface Node {
   id: string;
@@ -85,7 +86,7 @@ export default function GraphPage({ stats, onAskAboutPattern }: GraphPageProps) 
     setLoading(true);
     setError("");
     try {
-      const res = await fetch(`http://localhost:8000/graph/entity/${encodeURIComponent(name)}`);
+      const res = await fetch(`${API_URL}/graph/entity/${encodeURIComponent(name)}`);
       const data = await res.json();
       if (res.ok) {
         setGraphData(data);
@@ -107,8 +108,8 @@ export default function GraphPage({ stats, onAskAboutPattern }: GraphPageProps) 
     setGapsLoading(true);
     try {
       const [gapsRes, summaryRes] = await Promise.all([
-        fetch("http://localhost:8000/compliance/gaps"),
-        fetch("http://localhost:8000/compliance/summary"),
+        fetch(`${API_URL}/compliance/gaps`),
+        fetch(`${API_URL}/compliance/summary`),
       ]);
       if (gapsRes.ok) setGaps(await gapsRes.json());
       if (summaryRes.ok) setComplianceSummary(await summaryRes.json());
@@ -120,8 +121,8 @@ export default function GraphPage({ stats, onAskAboutPattern }: GraphPageProps) 
     setPatternsLoading(true);
     try {
       const [patRes, failRes] = await Promise.all([
-        fetch("http://localhost:8000/intelligence/patterns"),
-        fetch("http://localhost:8000/graph/failure-summary"),
+        fetch(`${API_URL}/intelligence/patterns`),
+        fetch(`${API_URL}/graph/failure-summary`),
       ]);
       if (patRes.ok) setPatterns(await patRes.json());
       if (failRes.ok) setFailureSummary(await failRes.json());
@@ -132,7 +133,7 @@ export default function GraphPage({ stats, onAskAboutPattern }: GraphPageProps) 
   const handleGenerateReport = async () => {
     setGeneratingReport(true);
     try {
-      const res = await fetch("http://localhost:8000/compliance/report", { method: "POST" });
+      const res = await fetch(`${API_URL}/compliance/report`, { method: "POST" });
       if (res.ok) {
         const data = await res.json();
         setReportMarkdown(data.report);

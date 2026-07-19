@@ -3,6 +3,7 @@ import {
   X, CloudUpload, CheckCircle, AlertCircle, Loader2,
   FileText, FileSpreadsheet, Image, File
 } from "lucide-react";
+import { API_URL } from "../config";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -139,7 +140,7 @@ export default function UploadModal({ open, onClose, onSuccess }: UploadModalPro
     }, 300);
 
     try {
-      const res = await fetch("http://localhost:8000/upload", {
+      const res = await fetch(`${API_URL}/upload`, {
         method: "POST",
         body: formData,
       });

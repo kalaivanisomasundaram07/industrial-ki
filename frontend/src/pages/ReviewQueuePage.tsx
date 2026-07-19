@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Check, X, FileText, Award } from "lucide-react";
+import { API_URL } from "../config";
 
 interface Triple {
   entity1: { type: string; name: string };
@@ -29,7 +30,7 @@ export default function ReviewQueuePage({ onQueueUpdated }: ReviewQueuePageProps
   const loadQueue = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/review-queue");
+      const res = await fetch(`${API_URL}/review-queue`);
       const data = await res.json();
       if (res.ok) {
         setItems(data);
@@ -47,7 +48,7 @@ export default function ReviewQueuePage({ onQueueUpdated }: ReviewQueuePageProps
 
   const handleApprove = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/review-queue/${id}/approve`, {
+      const res = await fetch(`${API_URL}/review-queue/${id}/approve`, {
         method: "POST",
       });
       if (res.ok) {
@@ -67,7 +68,7 @@ export default function ReviewQueuePage({ onQueueUpdated }: ReviewQueuePageProps
 
   const handleReject = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/review-queue/${id}/reject`, {
+      const res = await fetch(`${API_URL}/review-queue/${id}/reject`, {
         method: "POST",
       });
       if (res.ok) {
