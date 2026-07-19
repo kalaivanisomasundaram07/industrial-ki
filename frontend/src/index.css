@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@layer utilities {
+  /* Light mode card base */
+  .light-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+  }
+
+  .light-card-hover {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .light-card-hover:hover {
+    background: #f8fafc;
+    border-color: #7c3aed;
+    box-shadow: 0 4px 20px -4px rgba(124, 58, 237, 0.12);
+    transform: translateY(-1px);
+  }
+
+  /* Grounding glow helpers (light mode) */
+  .glow-green {
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.12);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+  }
+
+  /* Citation card */
+  .citation-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 0.875rem 1rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+
+  .citation-card:hover {
+    border-color: #7c3aed;
+    box-shadow: 0 4px 16px -4px rgba(124, 58, 237, 0.16);
+    transform: translateY(-1px);
+  }
+
+  /* Sentence highlight overrides */
+  .highlight-green {
+    background: #dcfce7;
+    color: #166534;
+    border-bottom: 2px solid #86efac;
+    padding: 0.1rem 0.25rem;
+    border-radius: 0.2rem;
+  }
+
+  .highlight-yellow {
+    background: #fef9c3;
+    color: #854d0e;
+    border-bottom: 2px solid #fde047;
+    padding: 0.1rem 0.25rem;
+    border-radius: 0.2rem;
+  }
+
+  .highlight-red {
+    background: #fee2e2;
+    color: #991b1b;
+    border-bottom: 2px solid #fca5a5;
+    padding: 0.1rem 0.25rem;
+    border-radius: 0.2rem;
+  }
+}
+
+/* Custom scrollbar — light mode */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Document viewer keyframes */
+@keyframes viewer-in {
+  from { opacity: 0; transform: scale(0.97) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

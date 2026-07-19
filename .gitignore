@@ -1,0 +1,64 @@
+# Environment variables - never push this
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+env/
+.venv/
+
+# Database files - contains real data
+*.db
+*.sqlite
+*.sqlite3
+
+# ChromaDB vector store - large, regeneratable
+chroma_db/
+
+# Neo4j local data
+neo4j_data/
+
+# Uploaded documents - may contain sensitive industrial data
+data/raw/
+data/processed/
+
+# Node modules
+node_modules/
+frontend/node_modules/
+
+# Frontend build
+frontend/dist/
+frontend/build/
+.vite/
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sentence transformer model cache
+.cache/
+models/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
