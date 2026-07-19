@@ -1,4 +1,11 @@
 import os
+import sys
+
+# Ensure parent directory of backend is in sys.path so backend absolute imports work
+_parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if _parent_dir not in sys.path:
+    sys.path.insert(0, _parent_dir)
+
 import sqlite3
 import json
 import time
@@ -892,8 +899,8 @@ def compliance_summary():
         # We call the gaps query inline here to avoid code duplication
         gaps_resp = None
         try:
-            from backend.verification import compliance as comp_mod
-            gaps_resp = comp_mod.get_compliance_gaps(driver)
+            matrix = get_compliance_matrix(driver)
+            gaps_resp = detect_gaps(matrix, driver)
         except Exception:
             gaps_resp = []
 

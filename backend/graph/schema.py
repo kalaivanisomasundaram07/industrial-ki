@@ -1,4 +1,11 @@
 import os
+import sys
+
+# Ensure parent directory of backend is in sys.path so backend absolute imports work
+_parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _parent_dir not in sys.path:
+    sys.path.insert(0, _parent_dir)
+
 from dotenv import load_dotenv
 
 # Load env variables from root directory
